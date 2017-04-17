@@ -79,8 +79,8 @@
 	
 	const char* form = pluralformf([lang cStringUsingEncoding:NSASCIIStringEncoding], pluralValue);
 	char suffix[16] = "##{";
-	strcat(suffix, form);
-	strcat(suffix, "}");
+	strlcat(suffix, form, sizeof(suffix));
+	strlcat(suffix, "}", sizeof(suffix));
 	NSString *keyVariant = [key stringByAppendingString:[NSString stringWithUTF8String:suffix]];
 	NSDictionary *dict = [self stringsWithContentsOfFile:tableName forLocalization:locale];
 	NSString *ls = dict[keyVariant];
